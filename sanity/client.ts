@@ -35,6 +35,6 @@ export async function getProfileSummary(profileId: string): Promise<ProfileSumma
                 ...,
                 "imageData": imageData.asset -> {...}
             }
-        }[0]`//, {cache: 'no-store'}
+        }[0]`, {cache: 'no-store'}
     );
 }

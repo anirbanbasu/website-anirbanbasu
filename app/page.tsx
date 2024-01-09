@@ -44,8 +44,8 @@ export default async function Home() {
           <PortableText value={profile.summary} />
         </p>
         <Image
-            className="relative"
-            src={urlFor(profile.profileImage.imageData).fit('max').url().toString()}
+            className="relative z-10 w-1/3 rounded-full"
+            src={urlFor(profile.profileImage.imageData).fit('min').url().toString()}
             alt={profile.profileImage.altText}
             width={profile.profileImage.imageData.metadata.dimensions.width/3}
             height={profile.profileImage.imageData.metadata.dimensions.height/3}
