@@ -1,10 +1,32 @@
 import Image from 'next/image'
+import type { Metadata, ResolvingMetadata } from 'next'
 import { urlFor, getProfileSummary } from '@/sanity/client'
 import { PortableText } from '@portabletext/react';
 import { ProfileSummary } from '@/types/ProfileSummary';
 
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+const profileId = '2a886ccf-baf9-4c46-99cc-f7028d6a230b'
+
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+ 
+  // fetch data
+  const profile:ProfileSummary = await getProfileSummary(profileId)
+ 
+  return {
+    title: profile.name,
+    description: profile.tagLine,
+  }
+}
+
 export default async function Home() {
-  const profile:ProfileSummary = await getProfileSummary('2a886ccf-baf9-4c46-99cc-f7028d6a230b');
+  const profile:ProfileSummary = await getProfileSummary(profileId)
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
