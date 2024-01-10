@@ -10,12 +10,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 const profileId = '2a886ccf-baf9-4c46-99cc-f7028d6a230b'
 
-type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-export async function generateMetadata({ params, searchParams }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   // fetch data
   const profile:ProfileSummary = await getProfileSummary(profileId)
   return {
