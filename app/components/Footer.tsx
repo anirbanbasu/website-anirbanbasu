@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { BiLogoGithub } from "react-icons/bi";
 import { PiCopyrightDuotone } from "react-icons/pi";
 
@@ -20,6 +21,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
+        <SpeedInsights />
       </footer>
     );
   }
