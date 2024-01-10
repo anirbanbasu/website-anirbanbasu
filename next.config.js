@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
     images: {
         remotePatterns: [
@@ -6,10 +7,9 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'cdn.sanity.io',
             port: '',
-            pathname: '/images/l7tokq15/production/**',
           },
         ],
       },
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;

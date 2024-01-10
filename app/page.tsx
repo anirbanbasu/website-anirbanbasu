@@ -1,68 +1,43 @@
 import Image from 'next/image'
-import type { Metadata, ResolvingMetadata } from 'next'
 import { urlFor, getProfileSummary } from '@/sanity/client'
 import { PortableText } from '@portabletext/react';
 import { ProfileSummary } from '@/types/ProfileSummary';
+import { FaTags } from "react-icons/fa";
 
-type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
 
 const profileId = '2a886ccf-baf9-4c46-99cc-f7028d6a230b'
-
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
- 
-  // fetch data
-  const profile:ProfileSummary = await getProfileSummary(profileId)
- 
-  return {
-    title: profile.name,
-    description: profile.tagLine,
-  }
-}
 
 export default async function Home() {
   const profile:ProfileSummary = await getProfileSummary(profileId)
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          <b>{profile.name}</b>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <code>{profile.tagLine}</code>
+    <main className="max-w-7xl mx-auto lg:px-16 px-6">
+      <section className="flex xl:flex-row flex-col xl:items-center items-start xl:justify-center justify-between gap-x-12 lg:mt-32 mt-20 mb-16">
+        <div key={profile._id} className="lg:max-w-2xl max-w-2xl">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6 lg:leading-[3.7rem] leading-tight lg:min-w-[700px] min-w-full">
+            {profile.name}
+          </h1>
+          <h2 className="text-xl font-extralight tracking-tight sm:text-2xl mb-6 lg:leading-[3.7rem] leading-tight lg:min-w-[700px] min-w-full">
+            {profile.tagLine}
+          </h2>
+          <div className="text-base text-justify text-zinc-400 leading-relaxed">
+            <PortableText value={profile.summary} />
+          </div>
+          <ul className="flex items-center gap-x-6 my-10">
+              {profile.keywords && profile.keywords.map((keyword, index) => (
+                  <li key={index} className="align-center flex text-sm text-pretty"><FaTags />&nbsp;{keyword}</li>
+                ))}
+            </ul>
         </div>
-      </div>
-
-      <div className="relative flex place-items-left">
-        <p className="m-0 p-8 max-w-[70ch] text-sm text-justify opacity-50">
-          <PortableText value={profile.summary} />
-        </p>
-        <Image
-            className="relative z-10 w-1/3 rounded-full"
+      <Image
+            className="relative z-10 w-1/3 rounded-lg"
             src={urlFor(profile.profileImage.imageData).fit('min').url().toString()}
             alt={profile.profileImage.altText}
             width={profile.profileImage.imageData.metadata.dimensions.width/3}
             height={profile.profileImage.imageData.metadata.dimensions.height/3}
             priority
           />
-      </div>
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-5 lg:text-left">
-      {
-        profile.keywords && profile.keywords.map((keyword, index) => (
-          <h2 key={index} className="mb-3 text-2xl font-light">
-            <div className="flex flex-wrap justify-center">
-              <p className="text-sm opacity-50">{keyword}</p>
-            </div>
-          </h2>
-        ))
-      }
-      </div>
+      </section>
     </main>
   )
 }
