@@ -17,7 +17,7 @@ export default function Footer() {
               target="_blank"
               rel="noreferrer noopener"
             >
-              <BiLogoGithub />
+              <BiLogoGithub title="GitHub repository" aria-label="GitHub repository" />
             </a>
           </div>
         </div>
