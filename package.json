@@ -1,7 +1,9 @@
 {
   "name": "website-anirbanbasu",
+  "description": "Test project for Next.js with Sanity.io for a personal website.",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
