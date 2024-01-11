@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+// Use dynamic nonce for CSP: https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
 const cspHeader = `
     default-src 'self';
     script-src 'self' 'unsafe-eval' 'unsafe-inline';

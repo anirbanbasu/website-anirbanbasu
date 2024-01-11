@@ -15,11 +15,11 @@ export default async function Home() {
       <section className="flex xl:flex-row flex-col xl:items-center items-start xl:justify-center justify-between gap-x-12 lg:mt-32 mt-20 mb-16">
       <Image
             className="relative z-10 w-1/3 rounded-lg"
-            src={urlFor(profile.profileImage.imageData).fit('min').url().toString()}
+            src={urlFor(profile.profileImage.imageData).quality(100).size(350,350).fit('min').url().toString()}
             alt={profile.profileImage.altText}
             width={profile.profileImage.imageData.metadata.dimensions.width}
             height={profile.profileImage.imageData.metadata.dimensions.height}
-            priority
+            priority={false}
           />
         <div key={profile._id} className="lg:max-w-2xl max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6 lg:leading-[3.7rem] leading-tight lg:min-w-[700px] min-w-full">
