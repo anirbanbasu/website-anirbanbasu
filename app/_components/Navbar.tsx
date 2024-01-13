@@ -40,7 +40,7 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
       <header>
-        <nav className="w-full bg-gray-100 align-middle fixed top-0 left-0 right-0 z-[100]">
+        <nav className="w-full dark:bg-slate-600 bg-gray-100 align-middle fixed top-0 left-0 right-0 z-[100]">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -48,7 +48,7 @@ export default function Navbar() {
                 <Image className="relative dark:invert" priority width={220} height={50} src="/logo.svg" alt="logo" />
               </Link>
               <div className="md:hidden">
-                <button className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <button className="p-2 dark:text-gray-100 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                   {isMenuOpen ? ( <IoCloseOutline size={25} /> ) : ( <PiListBullets size={25} /> )}
                 </button>
               </div>
