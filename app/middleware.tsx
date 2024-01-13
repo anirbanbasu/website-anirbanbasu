@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from 'next/server'
 export const config = {
     matcher: [
       /*
-       * Match all request paths except for the ones starting with:
-       * - api (API routes)
-       * - _next/static (static files)
-       * - _next/image (image optimization files)
-       * - favicon.ico (favicon file)
-       */
+      * Match all request paths except for the ones starting with:
+      * - api (API routes)
+      * - _next/static (static files)
+      * - _next/image (image optimization files)
+      * - favicon.ico (favicon file)
+      */
       {
         source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
         missing: [
@@ -17,7 +17,7 @@ export const config = {
         ],
       },
     ],
-  }
+}
  
 export function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
@@ -38,15 +38,12 @@ export function middleware(request: NextRequest) {
   const contentSecurityPolicyHeaderValue = cspHeader
     .replace(/\s{2,}/g, ' ')
     .trim()
- 
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-nonce', nonce)
- 
   requestHeaders.set(
     'Content-Security-Policy',
     contentSecurityPolicyHeaderValue
   )
- 
   const response = NextResponse.next({
     request: {
       headers: requestHeaders,
@@ -55,7 +52,6 @@ export function middleware(request: NextRequest) {
   response.headers.set(
     'Content-Security-Policy',
     contentSecurityPolicyHeaderValue
-  )
- 
+  ) 
   return response
 }

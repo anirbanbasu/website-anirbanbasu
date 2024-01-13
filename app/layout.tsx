@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from './_components/Navbar'
 import Footer from './_components/Footer'
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 import { ProfileSummary } from '@/types/ProfileSummary'
 import { getProfileSummary } from '@/sanity/client'
 
