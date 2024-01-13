@@ -11,22 +11,22 @@ export default async function Home() {
   const profile:ProfileSummary = await getProfileSummary(profileId)
 
   return (
-    <main className="h-screen p-10 w-full flex items-center justify-center">
-      <section className="p-5 border-2 border-zinc-600 rounded-lg">
-        <div key={profile._id} className="flex items-center">
+    <main className="mt-20 md:mt-24 p-2 md:p-4 w-full flex items-center justify-center">
+      <section className="p-4 border-2 border-zinc-600 rounded-lg">
+        <div key={profile._id} className="flex flex-wrap items-center">
           <Image
-                className="object-contain w-70 h-70 mr-8 rounded-lg"
+                className="object-contain mr-8 rounded-lg"
                 src={urlFor(profile.profileImage.imageData).quality(100).size(350,350).fit('min').url().toString()}
                 alt={profile.profileImage.altText}
-                width={140}
-                height={140}
+                width={175}
+                height={175}
                 priority={false}
               />
           <div>
-            <h1 className="font-display mb-2 md:text-4xl text-2xl font-semibold dark:text-gray-200">
+            <h1 className="font-display mt-4 md:mt-0 lg:text-4xl text-2xl font-semibold dark:text-gray-200">
               {profile.name}
             </h1>
-            <h2 className="md:text-2xl font-extralight tracking-tight text-xl mb-6">
+            <h2 className="lg:text-2xl font-extralight text-xl mb-4 md:mb-24 ">
               {profile.tagLine}
             </h2>
           </div>

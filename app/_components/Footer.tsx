@@ -5,7 +5,7 @@ import { BiLogoGithub } from "react-icons/bi";
 export default function Footer() {
     return (
       <footer>
-        <div className="w-full flex flex-wrap items-center justify-between gap-y-4 px-6 py-6 text-zinc-800">
+        <div className="w-full flex flex-wrap items-center justify-between gap-y-4 px-6 py-6 text-zinc-800 dark:text-zinc-300">
           <small className="duration-200 hover:text-white font-mono justify-between items-center flex">
             &copy;&nbsp;{new Date().getFullYear()}, Some Fancy-named Website Project. All rights reserved.
           </small>
