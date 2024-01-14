@@ -4,11 +4,8 @@ import { PortableText } from '@portabletext/react';
 import { ProfileSummary } from '@/types/ProfileSummary';
 import { PiTagChevronDuotone } from "react-icons/pi";
 
-
-const profileId = '2a886ccf-baf9-4c46-99cc-f7028d6a230b'
-
 export default async function Home() {
-  const profile:ProfileSummary = await getProfileSummary(profileId)
+  const profile:ProfileSummary = await getProfileSummary()
 
   return (
     <main className="mt-20 md:mt-24 p-2 md:p-4 w-full flex items-center justify-center">
