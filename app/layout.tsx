@@ -9,11 +9,9 @@ import { getProfileSummary } from '@/sanity/client'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const profileId = '2a886ccf-baf9-4c46-99cc-f7028d6a230b'
-
 export async function generateMetadata(): Promise<Metadata> {
   // fetch data
-  const profile:ProfileSummary = await getProfileSummary(profileId)
+  const profile:ProfileSummary = await getProfileSummary()
   return {
     title: profile.name,
     description: profile.tagLine,
