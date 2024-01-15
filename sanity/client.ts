@@ -26,7 +26,7 @@ export function urlFor(source: Image) {
 // The fetch has to be language aware once internationalisation is added
 export async function getProfileSummary(): Promise<ProfileSummary> {
     return sanityClient.fetch( 
-        groq`*[_type=='profileSummary']{
+        groq`*[_type=='profileSummary' && _language=='en']{
             _id,
             _createdAt,
             _updatedAt,
