@@ -43,14 +43,14 @@ export default async function Home() {
         <div className="text-base mt-4 mb-4 text-justify">
             <PortableText value={profile.summary} />
         </div>
-        <ul className="pb-4 pt-4 flex flex-wrap items-center gap-4">
-            {(profile.skills!=null)? 'Top skills:' : ''}
+        {(profile.skills!=null)? 'Top skills:' : ''}
+        <ul className="pb-4 flex flex-wrap items-center gap-4">
             {profile.skills && profile.skills.map((skill, index) => (
                 <li key={index} className="items-center flex justify-between text-pretty"><GoWorkflow />&nbsp;{skill.skill}&nbsp;{(skill.note!=null? `(${skill.note})`: '' )}</li>
               ))}
         </ul>
+        {(profile.languageSkills!=null)? 'Languages:' : ''}
         <ul className="pb-4 flex flex-wrap items-center gap-4">
-            {(profile.languageSkills!=null)? 'Languages:' : ''}
             {profile.languageSkills && profile.languageSkills.map((languageSkill, index) => (
                 <li key={index} className="items-center flex justify-between text-pretty"><IoLanguageOutline />&nbsp;{languageSkill.languageSkill}&nbsp;{(languageSkill.locale!=null? `(${languageSkill.locale})`: '' )}</li>
               ))}
