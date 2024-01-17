@@ -3,8 +3,8 @@ import { createClient, type ClientConfig } from "next-sanity";
 
 import imageUrlBuilder from '@sanity/image-url'
 import { Image } from "sanity";
-import { ProfileSummary } from "@/types/ProfileSummary";
 import { groq } from "next-sanity";
+import { Profile } from '@/types/Profile';
 
 const sanityClientConfig: ClientConfig = {
     projectId: 'l7tokq15',
@@ -24,21 +24,43 @@ export function urlFor(source: Image) {
 }
 
 // The fetch has to be language aware once internationalisation is added
-export async function getProfileSummary(): Promise<ProfileSummary> {
-    return sanityClient.fetch( 
-        groq`*[_type=='profileSummary' && language=='en']{
-            _id,
-            _createdAt,
-            _updatedAt,
-            _rev,
-            name,
-            tagLine,
-            summary,
-            keywords[],
-            profileImage -> {
-                ...,
-                "imageData": imageData.asset -> {...}
-            }
-        }[0]`, {next: {revalidate: revalidateTime}}
-    );
+export async function fetchProfile(): Promise<Profile> {
+    return sanityClient.fetch(
+        groq`*[_type == 'profile'] {
+        _id,
+        _createdAt,
+        _updatedAt,
+        _rev,
+        name,
+        headline,
+        summary,
+        formalEducation[] 
+            | order(endDate desc) -> {
+          ...,
+          skills[] -> {...},
+        },
+        projects[] -> {
+          ...,
+          skills[] -> {...},
+          contributors[] -> {...},
+        },
+        skills[] | order(level desc) -> {
+          ...
+        },
+        languageSkills[] 
+            | order(readingLevel desc) 
+            | order(writingLevel desc) 
+            | order(listeningLevel desc) 
+            | order(speakingLevel desc) 
+            | order(languageSkill asc) -> {
+          ...
+        },
+        keywords,
+        profileImage -> {
+          ...,
+          "imageData": imageData.asset -> {...}
+        },
+        language,
+      }[0]`,
+      {next: {revalidate: revalidateTime}});
 }
