@@ -1,6 +1,7 @@
 import { PortableTextBlock } from "sanity";
 import { Skill } from "./Skill";
 import { ContributingAuthor } from "./ContributingAuthor";
+import { Picture } from "./Picture";
 
 export type Project = {
     _id: string,
@@ -14,5 +15,6 @@ export type Project = {
     description: PortableTextBlock[],
     skills: Skill[],
     contributors: ContributingAuthor[],
+    representativePicture: Picture,
     keywords: string[],
 }

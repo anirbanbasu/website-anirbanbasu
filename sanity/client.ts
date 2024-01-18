@@ -34,7 +34,7 @@ export async function fetchProfile(): Promise<Profile> {
         name,
         headline,
         summary,
-        formalEducation[] 
+        education[] 
             | order(endDate desc) -> {
           ...,
           skills[] -> {...},
@@ -43,6 +43,10 @@ export async function fetchProfile(): Promise<Profile> {
           ...,
           skills[] -> {...},
           contributors[] -> {...},
+          representativePicture -> {
+            ...,
+            "imageData": imageData.asset -> {...}
+          },
         },
         skills[] | order(level desc) -> {
           ...

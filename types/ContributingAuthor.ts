@@ -1,5 +1,5 @@
 import { PersonName } from "./PersonName"
-import { Photograph } from "./Photograph"
+import { Picture } from "./Picture"
 
 export type ContributingAuthor = {
     _id: string,
@@ -11,5 +11,5 @@ export type ContributingAuthor = {
     organisationalName: string,
     orcid: string,
     webURL: string,
-    imageRef: Photograph,
+    imageRef: Picture,
 }
