@@ -27,44 +27,54 @@ export function urlFor(source: Image) {
 export async function fetchProfile(): Promise<Profile> {
     return sanityClient.fetch(
         groq`*[_type == 'profile'] {
-        _id,
-        _createdAt,
-        _updatedAt,
-        _rev,
-        name,
-        headline,
-        summary,
-        education[] 
-            | order(endDate desc) -> {
-          ...,
-          skills[] -> {...},
-        },
-        projects[] -> {
-          ...,
-          skills[] -> {...},
-          contributors[] -> {...},
-          representativePicture -> {
+          _id,
+          _createdAt,
+          _updatedAt,
+          _rev,
+          name,
+          headline,
+          summary,
+          experience[] 
+              | order(endDate desc) -> {
+            ...,
+            skills[] -> {...},
+            relatedProjects[] -> {...}
+          },
+          education[] 
+              | order(endDate desc) -> {
+            ...,
+            skills[] -> {...},
+          },
+          projects[] -> {
+            ...,
+            skills[] -> {...},
+            contributors[] -> {...},
+            representativePicture -> {
+              ...,
+              "imageData": imageData.asset -> {...}
+            },
+            otherPictures[] -> {
+              ...,
+              "imageData": imageData.asset -> {...}
+            }
+          },
+          skills[] | order(level desc) -> {
+            ...
+          },
+          languageSkills[] 
+              | order(readingLevel desc) 
+              | order(writingLevel desc) 
+              | order(listeningLevel desc) 
+              | order(speakingLevel desc) 
+              | order(languageSkill asc) -> {
+            ...
+          },
+          keywords,
+          profileImage -> {
             ...,
             "imageData": imageData.asset -> {...}
           },
-        },
-        skills[] | order(level desc) -> {
-          ...
-        },
-        languageSkills[] 
-            | order(readingLevel desc) 
-            | order(writingLevel desc) 
-            | order(listeningLevel desc) 
-            | order(speakingLevel desc) 
-            | order(languageSkill asc) -> {
-          ...
-        },
-        keywords,
-        profileImage -> {
-          ...,
-          "imageData": imageData.asset -> {...}
-        },
-        language,
-      }[0]`,
+          language,
+        }[0]`,
       {next: {revalidate: revalidateTime}});
 }

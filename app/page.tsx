@@ -21,24 +21,24 @@ export default async function Home() {
 
   return (
     <main className="mt-20 md:mt-24 p-2 w-full items-center justify-center">
-      <section className="p-0">
+      <section className="mx-auto max-w-7xl p-0">
         <div key={profile._id} className="flex flex-wrap md:flex-nowrap">
           <Image
-                className="basis-1/4 grow object-contain md:mr-4"
+                className="basis-1/5 grow object-contain md:mr-4"
                 src={urlFor(profile.profileImage.imageData).quality(100).size(350,350).fit('min').url().toString()}
                 alt={profile.profileImage.caption}
                 width={175}
                 height={175}
                 priority={false}
               />
-          <div className="basis-3/4 grow">
+          <div className="basis-4/5 grow">
             <h1 className="font-display mt-4 md:mt-0 lg:text-4xl text-2xl font-semibold dark:text-gray-200">
               {profile.name.givenNames.join(' ').concat(' ', profile.name.familyName)}
             </h1>
             <h2 className="lg:text-2xl font-extralight text-xl mb-4">
               {profile.headline}
             </h2>
-            <div className="text-base mt-4 mb-4 text-justify">
+            <div className="text-base md:text-lg mt-4 mb-4 text-justify">
               <PortableText value={profile.summary} />
             </div>
           </div>

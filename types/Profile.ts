@@ -5,6 +5,7 @@ import { LanguageSkill } from "./LanguageSkill";
 import { PersonName } from "./PersonName";
 import { Education } from "./Education";
 import { Picture } from "./Picture";
+import { Experience } from "./Experience";
 
 export type Profile = {
     _id: string,
@@ -19,6 +20,7 @@ export type Profile = {
     language: string,
     skills: Skill[],
     languageSkills: LanguageSkill[],
-    formalEducation: Education[],
+    education: Education[],
     projects: Project[],
+    experience: Experience[],
 }
