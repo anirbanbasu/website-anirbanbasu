@@ -20,46 +20,46 @@ export default async function Home() {
   const profile:Profile = await fetchProfile()
 
   return (
-    <main className="mt-20 md:mt-24 p-2 md:p-4 w-full flex items-center justify-center">
-      <section className="p-4 border-2 border-zinc-600 rounded-lg">
-        <div key={profile._id} className="flex flex-wrap items-center">
+    <main className="mt-20 md:mt-24 p-2 w-full items-center justify-center">
+      <section className="p-0">
+        <div key={profile._id} className="flex flex-wrap md:flex-nowrap">
           <Image
-                className="object-contain mr-8 rounded-lg"
+                className="basis-1/4 grow object-contain md:mr-4"
                 src={urlFor(profile.profileImage.imageData).quality(100).size(350,350).fit('min').url().toString()}
                 alt={profile.profileImage.caption}
                 width={175}
                 height={175}
                 priority={false}
               />
-          <div>
+          <div className="basis-3/4 grow">
             <h1 className="font-display mt-4 md:mt-0 lg:text-4xl text-2xl font-semibold dark:text-gray-200">
               {profile.name.givenNames.join(' ').concat(' ', profile.name.familyName)}
             </h1>
-            <h2 className="lg:text-2xl font-extralight text-xl mb-4 md:mb-24 ">
+            <h2 className="lg:text-2xl font-extralight text-xl mb-4">
               {profile.headline}
             </h2>
+            <div className="text-base mt-4 mb-4 text-justify">
+              <PortableText value={profile.summary} />
+            </div>
           </div>
         </div>
-        <div className="text-base mt-4 mb-4 text-justify">
-            <PortableText value={profile.summary} />
-        </div>
-        {(profile.skills!=null)? 'Top skills:' : ''}
-        <ul className="pb-4 flex flex-wrap items-center gap-4">
-            {profile.skills && profile.skills.map((skill, index) => (
-                <li key={index} className="items-center flex justify-between text-pretty"><GoWorkflow />&nbsp;{skill.skill}&nbsp;{(skill.note!=null? `(${skill.note})`: '' )}</li>
-              ))}
-        </ul>
-        {(profile.languageSkills!=null)? 'Languages:' : ''}
-        <ul className="pb-4 flex flex-wrap items-center gap-4">
-            {profile.languageSkills && profile.languageSkills.map((languageSkill, index) => (
-                <li key={index} className="items-center flex justify-between text-pretty"><IoLanguageOutline />&nbsp;{languageSkill.languageSkill}&nbsp;{(languageSkill.locale!=null? `(${languageSkill.locale})`: '' )}</li>
-              ))}
-        </ul>
-        <ul className="border-t  border-zinc-800 pt-4 flex flex-wrap items-center gap-4">
-            {profile.keywords && profile.keywords.map((keyword, index) => (
-                <li key={index} className="items-center flex justify-between text-sm text-pretty"><PiTagChevronDuotone />&nbsp;{keyword}</li>
-              ))}
-        </ul>
+        <div>
+          <ul className="pt-4 pb-4 flex flex-wrap self-center gap-4">
+              {profile.skills && profile.skills.map((skill, index) => (
+                  <li key={index} className="self-center inline-flex justify-between text-pretty"><GoWorkflow />&nbsp;{skill.skill}</li>
+                ))}
+          </ul>
+          <ul className="pb-4 flex flex-wrap items-center gap-4">
+              {profile.languageSkills && profile.languageSkills.map((languageSkill, index) => (
+                  <li key={index} className="items-center flex justify-between text-pretty"><IoLanguageOutline />&nbsp;{languageSkill.languageSkill}&nbsp;{(languageSkill.locale!=null? `(${languageSkill.locale})`: '' )}</li>
+                ))}
+          </ul>
+            <ul className="border-t  border-zinc-800 pt-4 flex flex-wrap items-center gap-4">
+                {profile.keywords && profile.keywords.map((keyword, index) => (
+                    <li key={index} className="items-center flex justify-between text-sm text-pretty"><PiTagChevronDuotone />&nbsp;{keyword}</li>
+                  ))}
+            </ul>
+          </div>
       </section>
     </main>
   )
