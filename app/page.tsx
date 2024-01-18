@@ -26,7 +26,7 @@ export default async function Home() {
           <Image
                 className="object-contain mr-8 rounded-lg"
                 src={urlFor(profile.profileImage.imageData).quality(100).size(350,350).fit('min').url().toString()}
-                alt={profile.profileImage.altText}
+                alt={profile.profileImage.caption}
                 width={175}
                 height={175}
                 priority={false}
