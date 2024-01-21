@@ -28,7 +28,7 @@ export default async function Home() {
           <div className="col-span-2 col-start-5 row-span-3 flex items-center justify-center">
             <div className="grid grid-cols-1 gap-1"> 
               <Image
-                  src={urlFor(profile.profileImage.imageData).quality(100).size(700,700).fit('min').url().toString()}
+                  src={urlFor(profile.profileImage.imageData).quality(100).size(400,400).fit('min').url().toString()}
                   alt={profile.profileImage.caption}
                   title={profile.profileImage.caption}
                   width={350}
