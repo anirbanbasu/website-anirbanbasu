@@ -1,11 +1,9 @@
 import Image from 'next/image'
-import { urlFor, fetchProfile } from '@/sanity/client'
+import { urlFor, fetchProfile, socialLinkIcon } from '@/sanity/client'
 import { PortableText } from '@portabletext/react';
-import { GoWorkflow } from "react-icons/go";
-import { IoLanguageOutline } from "react-icons/io5";
-import { PiTagChevronDuotone } from "react-icons/pi";
 import { Metadata } from 'next';
 import { Profile } from '@/types/Profile';
+import Link from 'next/link';
 
 export async function generateMetadata(): Promise<Metadata> {
   // fetch data
@@ -37,19 +35,24 @@ export default async function Home() {
                   height={350}
                   priority={false}
                 />
-                {typeof profile.profileImage.attribution === 'undefined' ? ``: ( <span className="-mt-5 w-auto truncate px-1 text-right text-sm text-gray-200 backdrop-blur-md" title={profile.profileImage.attribution}>{profile.profileImage.attribution}</span> )}
+                {typeof profile.profileImage.attribution === 'undefined' ? ``: ( <span className="-mt-5 w-auto truncate px-1 text-right text-sm text-gray-500 backdrop-blur-md" title={profile.profileImage.attribution}>{profile.profileImage.attribution}</span> )}
             </div>
           </div>
           <div className="col-span-6 p-2 text-justify text-base md:text-lg font-extralight text-gray-800 md:col-span-4">
             <PortableText value={profile.summary}/>
           </div>
-          {profile.keywords && profile.keywords.map((keyword, index) => {
-            return (
-              <div key={index} className="border-slate-400 hover:bg-sky-200 col-span-2 border-[1px] break-words rounded-md p-2 text-center text-sm font-light text-gray-600">
-                {keyword}
-              </div>
-            )
-          })}
+          <div className="col-span-6 md:col-span-4 flex item-center justify-evenly">
+              {profile.socialLinks && profile.socialLinks.map((item, index) => {
+                  const Icon = socialLinkIcon(item.socialLinkType)
+                  if (index < 5 && item.socialLinkType !== 'other') {
+                    return (
+                        <Link key={index} href={item.linkURL} title={item.caption} aria-label={item.caption} target="_blank" rel="noreferrer noopener">
+                          <Icon className="mx-2 w-8 h-8 text-slate-600 hover:text-red-700"/>
+                        </Link>
+                    )
+                  }
+                })}
+          </div>
         </div>
       </section>
     </main>

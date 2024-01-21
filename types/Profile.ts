@@ -6,6 +6,7 @@ import { PersonName } from "./PersonName";
 import { Education } from "./Education";
 import { Picture } from "./Picture";
 import { Experience } from "./Experience";
+import { SocialLink } from "./SocialLink";
 
 export type Profile = {
     _id: string,
@@ -15,6 +16,7 @@ export type Profile = {
     name: PersonName,
     headline: string,
     summary: PortableTextBlock[],
+    socialLinks: SocialLink[],
     keywords: string[],
     profileImage: Picture,
     language: string,
