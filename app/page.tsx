@@ -24,7 +24,7 @@ export default async function Home() {
     <main className="flex items-center justify-center">
       <section className="mt-20 md:mt-24 max-w-7xl p-2">
         <div id={profile._id} className="grid grid-cols-6 gap-1">
-          <div className="col-span-4 row-span-2 p-2 text-start break-words text-4xl font-bold md:font-black text-gray-600 md:text-6xl">
+          <div className="bg-gradient-to-r from-blue-600 via-orange-400 to-lime-600 bg-clip-text text-transparent col-span-4 row-span-2 p-2 text-start break-words text-4xl font-bold md:font-black text-gray-600 md:text-6xl">
             {profile.headline.toLowerCase()}
           </div>
           <div className="col-span-2 col-start-5 row-span-3 flex items-center justify-center">
@@ -40,7 +40,9 @@ export default async function Home() {
                 {typeof profile.profileImage.attribution === 'undefined' ? ``: ( <span className="-mt-5 w-auto truncate px-1 text-right text-sm text-gray-200 backdrop-blur-md" title={profile.profileImage.attribution}>{profile.profileImage.attribution}</span> )}
             </div>
           </div>
-          <div className="col-span-6 p-2 text-justify text-base md:text-lg font-extralight text-gray-800 md:col-span-4"><PortableText value={profile.summary}/></div>
+          <div className="col-span-6 p-2 text-justify text-base md:text-lg font-extralight text-gray-800 md:col-span-4">
+            <PortableText value={profile.summary}/>
+          </div>
           {profile.keywords && profile.keywords.map((keyword, index) => {
             return (
               <div key={index} className="border-slate-400 hover:bg-sky-200 col-span-2 border-[1px] break-words rounded-md p-2 text-center text-sm font-light text-gray-600">
