@@ -40,9 +40,9 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
       <header>
-        <nav className="w-full dark:bg-slate-600 bg-slate-100 align-middle fixed top-0 left-0 right-0 z-[100]">
+        <nav className="w-full opacity-95 dark:bg-slate-600 bg-slate-100 align-middle fixed top-0 left-0 right-0 z-[100]">
           <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-            <div>
+            <div> 
               <div className="flex items-center justify-between py-3 md:py-5 md:block">
                 <Link href="/">
                   <Image className="relative dark:invert" priority width={220} height={50} src="/logo.svg" alt="logo" />
@@ -60,10 +60,10 @@ export default function Navbar() {
                   {routes.map((route, index) => {
                     const { title, subtitle, href } = route;
                     return (
-                      <li key={index} className="p-3 md:py-5 text-left border-b-2 border-gray-700 md:border-b-0">
-                        <Link className=" hover:text-neutral-400 transition-all" href={href} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                      <li key={index} className="p-3 md:py-5 text-left border-b-[1px] border-gray-700 md:border-b-0">
+                        <Link className="font-bold text-xl md:font-normal md:text-base hover:text-neutral-400 transition-all" href={href} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                           {title}
-                          <div className="md:hidden text-xs">{subtitle}</div>
+                          <div className="md:hidden font-light text-base">{subtitle}</div>
                         </Link>
                       </li>
                     );

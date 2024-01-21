@@ -18,48 +18,37 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const profile:Profile = await fetchProfile()
+  //console.log(profile.profileImage) // Why does the attribution not get displayed?
 
   return (
-    <main className="mt-20 md:mt-24 p-2 w-full items-center justify-center">
-      <section className="mx-auto max-w-7xl p-0">
-        <div key={profile._id} className="flex flex-wrap md:flex-nowrap">
-          <Image
-                className="basis-1/5 grow object-contain md:mr-4"
-                src={urlFor(profile.profileImage.imageData).quality(100).size(350,350).fit('min').url().toString()}
-                alt={profile.profileImage.caption}
-                width={175}
-                height={175}
-                priority={false}
-              />
-          <div className="basis-4/5 grow">
-            <h1 className="font-display mt-4 md:mt-0 lg:text-4xl text-2xl font-semibold dark:text-gray-200">
-              {profile.name.givenNames.join(' ').concat(' ', profile.name.familyName)}
-            </h1>
-            <h2 className="lg:text-2xl font-extralight text-xl mb-4">
-              {profile.headline}
-            </h2>
-            <div className="text-base md:text-lg mt-4 mb-4 text-justify">
-              <PortableText value={profile.summary} />
+    <main className="flex items-center justify-center">
+      <section className="mt-20 md:mt-24 max-w-7xl p-2">
+        <div id={profile._id} className="grid grid-cols-6 gap-1">
+          <div className="col-span-4 row-span-2 p-2 text-start text-4xl font-bold md:font-black text-gray-600 md:text-6xl">
+            {profile.headline.toLowerCase()}
+          </div>
+          <div className="col-span-2 col-start-5 row-span-3 flex items-center justify-center">
+            <div className="grid grid-cols-1 gap-1"> 
+              <Image
+                  src={urlFor(profile.profileImage.imageData).quality(100).size(700,700).fit('min').url().toString()}
+                  alt={profile.profileImage.caption}
+                  title={profile.profileImage.caption}
+                  width={350}
+                  height={350}
+                  priority={false}
+                />
+                {typeof profile.profileImage.attribution === 'undefined' ? ``: ( <span className="-mt-5 w-auto truncate px-1 text-right text-sm text-gray-200 backdrop-blur-md" title={profile.profileImage.attribution}>{profile.profileImage.attribution}</span> )}
             </div>
           </div>
+          <div className="col-span-6 p-2 text-justify text-base md:text-lg font-extralight text-gray-800 md:col-span-4"><PortableText value={profile.summary}/></div>
+          {profile.keywords && profile.keywords.map((keyword, index) => {
+            return (
+              <div key={index} className="border-slate-400 hover:bg-sky-200 col-span-2 border-[1px] break-words rounded-md p-2 text-center text-sm font-light text-gray-600">
+                {keyword}
+              </div>
+            )
+          })}
         </div>
-        <div>
-          <ul className="pt-4 pb-4 flex flex-wrap self-center gap-4">
-              {profile.skills && profile.skills.map((skill, index) => (
-                  <li key={index} className="self-center inline-flex justify-between text-pretty"><GoWorkflow />&nbsp;{skill.skill}</li>
-                ))}
-          </ul>
-          <ul className="pb-4 flex flex-wrap items-center gap-4">
-              {profile.languageSkills && profile.languageSkills.map((languageSkill, index) => (
-                  <li key={index} className="items-center flex justify-between text-pretty"><IoLanguageOutline />&nbsp;{languageSkill.languageSkill}&nbsp;{(languageSkill.locale!=null? `(${languageSkill.locale})`: '' )}</li>
-                ))}
-          </ul>
-            <ul className="border-t  border-zinc-800 pt-4 flex flex-wrap items-center gap-4">
-                {profile.keywords && profile.keywords.map((keyword, index) => (
-                    <li key={index} className="items-center flex justify-between text-sm text-pretty"><PiTagChevronDuotone />&nbsp;{keyword}</li>
-                  ))}
-            </ul>
-          </div>
       </section>
     </main>
   )

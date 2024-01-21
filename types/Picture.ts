@@ -8,5 +8,7 @@ export type Picture = {
     caption: string,
     description: PortableTextBlock[],
     imageData: ImageAsset,
+    attribution: string,
+    attributionURL: string,
     tags: string[],
 }
