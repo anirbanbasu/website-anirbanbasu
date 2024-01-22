@@ -41,10 +41,10 @@ export default async function Home() {
           <div className="col-span-6 p-2 text-justify text-base md:text-lg font-extralight text-gray-800 md:col-span-4">
             <PortableText value={profile.summary}/>
           </div>
-          <div className="col-span-6 md:col-span-4 flex item-center justify-evenly">
+          <div className="my-3 col-span-6 md:col-span-4 flex item-center justify-evenly">
               {profile.socialLinks && profile.socialLinks.map((item, index) => {
                   const Icon = socialLinkIcon(item.socialLinkType)
-                  if (index < 5 && item.socialLinkType !== 'other') {
+                  if (item.socialLinkType !== 'other') {
                     return (
                         <Link key={index} href={item.linkURL} title={item.caption} aria-label={item.caption} target="_blank" rel="noreferrer noopener">
                           <Icon className="mx-2 w-8 h-8 text-slate-600 hover:text-red-700"/>
