@@ -6,7 +6,6 @@ import { useState } from "react";
 
 import { PiListBullets } from "react-icons/pi";
 import { IoCloseOutline } from "react-icons/io5";
-import { BsViewList } from "react-icons/bs";
 
 export const routes = [
   {
@@ -60,8 +59,8 @@ export default function Navbar() {
                   {routes.map((route, index) => {
                     const { title, subtitle, href } = route;
                     return (
-                      <li key={index} className="p-3 md:py-5 text-left border-b-[1px] border-gray-700 md:border-b-0">
-                        <Link className="font-bold text-xl md:font-normal md:text-base hover:text-neutral-400 transition-all" href={href} onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                      <li key={index} className="p-3 md:py-5 text-left border-b-[1px] border-gray-700 md:dark:border-red-300 md:border-red-600 md:border-b-0 md:hover:border-b-2">
+                        <Link className="font-bold text-xl md:font-normal md:text-base text-gray-800 dark:text-gray-100 hover:text-neutral-400 md:hover:text-red-300 transition-all" href={href} onClick={() => setIsMenuOpen(!isMenuOpen)}>
                           {title}
                           <div className="md:hidden font-light text-base">{subtitle}</div>
                         </Link>

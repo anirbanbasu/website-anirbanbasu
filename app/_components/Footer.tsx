@@ -1,24 +1,22 @@
+import { fetchProfile } from "@/sanity/client";
+import { Profile } from "@/types/Profile";
+import Image from "next/image";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { BiLogoGithub } from "react-icons/bi";
 
 
-export default function Footer() {
+export default async function Footer() {
+    const profile:Profile = await fetchProfile()
+
     return (
-      <footer>
-        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-y-4 px-2 py-6 text-zinc-800 dark:text-zinc-300">
-          <small className="duration-200 hover:text-white font-mono justify-between items-center flex">
-            &copy;&nbsp;{new Date().getFullYear()}, Some Fancy-named Website Project. All rights reserved.
+      <footer className=" dark:bg-slate-400 bg-slate-100">
+        <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-y-4 px-2 py-6 text-zinc-800 dark:text-zinc-100">
+          <small>
+            &copy;&nbsp;{new Date().getFullYear()}, {profile?.name.givenNames.join(' ').concat(' ', profile?.name.familyName)}. All rights reserved.
           </small>
   
-          <div className="hover:text-white duration-200 justify-between flex items-center">
-            <a
-              href="https://github.com/anirbanbasu/website-anirbanbasu"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <BiLogoGithub title="GitHub repository" aria-label="GitHub repository" />
-            </a>
-          </div>
+          <small><a href="https://github.com/typedfolio" target="_blank" rel="noreferrer noopener" className="flex items-center justify-center">
+              <span>Made with&nbsp;</span><Image src="./typedfolio-logo.svg" className="bg-red-200" alt="Typedfolio project" width={125} height={25} />
+            </a></small>
         </div>
         <SpeedInsights />
       </footer>
