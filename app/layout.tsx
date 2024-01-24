@@ -1,10 +1,9 @@
 import { Analytics } from '@vercel/analytics/react';
-import { Inter, Montserrat } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import './globals.css'
 import Navbar from './_components/Navbar'
 import Footer from './_components/Footer'
 
-const inter = Inter({ subsets: ['latin', 'latin-ext'] })
 const montserrat = Montserrat({ subsets: ['latin', 'latin-ext'] })
 
 export default function RootLayout({
