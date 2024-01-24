@@ -41,7 +41,6 @@ export default function Navbar() {
       <header>
         <nav className="w-full opacity-95 dark:bg-slate-600 bg-slate-100 align-middle fixed top-0 left-0 right-0 z-[100]">
           <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
-            <div> 
               <div className="flex items-center justify-between py-3 md:py-5 md:block">
                 <Link href="/">
                   <Image className="relative dark:invert" priority width={220} height={50} src="/logo.svg" alt="logo" />
@@ -52,9 +51,8 @@ export default function Navbar() {
                   </button>
                 </div>
               </div>
-            </div>
-            <div>
-              <div className={`flex-1 justify-between items-center align-middle pb-3 mt-8 md:block md:pb-0 md:mt-0 ${isMenuOpen ? 'p-12 md:p-0 block' : 'hidden'}`}>
+            <div className="max-h-screen overflow-y-scroll md:overflow-hidden">
+              <div className={`flex-1 justify-between items-center align-middle pb-3 md:block md:pb-0 ${isMenuOpen ? 'px-12 py-6 md:p-0 block' : 'hidden'}`}>
                 <ul className="h-screen md:h-auto font-sans text-base items-center justify-center md:flex">
                   {routes.map((route, index) => {
                     const { title, subtitle, href } = route;

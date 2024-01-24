@@ -8,9 +8,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        custom: ['Montserrat', 'sans-serif'],
-    },
     },
   },
   plugins: [],
