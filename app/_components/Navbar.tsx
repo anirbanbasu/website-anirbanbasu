@@ -11,7 +11,7 @@ export const routes = [
   {
     title: "Home",
     subtitle: "The summary page",
-    href: "#",
+    href: "/",
   },
   {
     title: "Publications",
@@ -26,7 +26,7 @@ export const routes = [
   {
     title: "Projects",
     subtitle: "Things I'm working on",
-    href: "#",
+    href: "/projects",
   },
   {
     title: "et cetera",

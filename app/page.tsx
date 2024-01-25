@@ -16,13 +16,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const profile:Profile = await fetchProfile()
-  //console.log(profile.profileImage) // Why does the attribution not get displayed?
 
   return (
     <main className="flex items-center justify-center">
       <section className="mt-20 md:mt-24 max-w-7xl p-2">
         <div id={profile._id} className="grid grid-cols-6 gap-1">
-          <div className="bg-gradient-to-r from-primary via-accent to-error bg-clip-text text-transparent col-span-4 row-span-2 p-2 text-start break-words text-4xl font-bold md:font-black text-gray-600 md:text-6xl">
+          <div className="bg-gradient-to-r from-primary via-accent to-error bg-clip-text text-transparent col-span-4 row-span-2 p-2 text-start break-words text-4xl font-bold md:font-black md:text-6xl">
             {profile.headline.toLowerCase()}
           </div>
           <div className="col-span-2 col-start-5 row-span-3 flex items-center justify-center">

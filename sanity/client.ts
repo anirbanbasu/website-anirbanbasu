@@ -8,6 +8,7 @@ import { Profile } from '@/types/Profile';
 import { IconType } from 'react-icons';
 import { IoShareSocialOutline } from 'react-icons/io5';
 import { Si500Px, SiAcademia, SiArtstation, SiBehance, SiBitbucket, SiDribbble, SiEtsy, SiFacebook, SiFlickr, SiGithub, SiGitlab, SiGoodreads, SiGooglescholar, SiInstagram, SiLinkedin, SiMedium, SiOrcid, SiPatreon, SiPinterest, SiReddit, SiResearchgate, SiSketchfab, SiSnapchat, SiSociety6, SiSoundcloud, SiSpotify, SiStackexchange, SiStackoverflow, SiTiktok, SiTumblr, SiTwitch, SiTwitter, SiVimeo, SiWordpress, SiYoutube, SiZotero } from "react-icons/si";
+import { Project } from '@/types/Project';
 
 const sanityClientConfig: ClientConfig = {
     projectId: 'l7tokq15',
@@ -124,4 +125,31 @@ export async function fetchProfile(): Promise<Profile> {
           language,
         }[0]`,
       {next: {revalidate: revalidateTime}});
+}
+
+export async function fetchProjects(): Promise<Project[]> {
+  return sanityClient.fetch(
+    groq`*[_type == 'project'] | order(startDate desc) {
+      _id,
+      _createdAt,
+      _updatedAt,
+      _rev,
+      name,
+      webURL,
+      startDate,
+      endDate,
+      description,
+      skills[] -> {...},
+      contributors[] -> {...},
+      representativePicture -> {
+        ...,
+        "imageData": imageData.asset -> {...}
+      },
+      otherPictures[] -> {
+        ...,
+        "imageData": imageData.asset -> {...}
+      },
+      keywords,
+    }`,
+  {next: {revalidate: revalidateTime}});
 }
