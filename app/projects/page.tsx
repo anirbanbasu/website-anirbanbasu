@@ -7,8 +7,7 @@ import Link from 'next/link';
 import { Project } from '@/types/Project';
 import { HiHashtag } from "react-icons/hi2";
 import { PiPlayDuotone, PiStopDuotone } from "react-icons/pi";
-
-
+import { GrMore } from "react-icons/gr";
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -24,6 +23,9 @@ export default async function Home() {
   const projects:Project[] = await fetchProjects()
   const ongoing:string = 'on-going'
 
+  const mainImageHeight:number = 208 //h-52 = 208px, adjust height and width request to download smaller images
+  const carouselImageWidth:number = 144 //w-12 = 48px, adjust height and width request to download smaller images but 48 is too small to be useful
+
   return (
     <main className="flex items-center justify-center">
       <section className="mt-20 md:mt-24 max-w-7xl p-2">
@@ -31,49 +33,46 @@ export default async function Home() {
             {projects && projects.map((project, index) => {
                     return (
                         <article key={project._id} className="card card-compact rounded-none w-auto bg-base-200 shadow-md">
-                          {project.endDate === null? <div className="absolute m-2 badge rounded-none badge-warning text-warning-content text-xs tracking-tight uppercase">{ongoing}</div> : null }
+                          {project.endDate === null? <div className="absolute top-2 left-2 badge rounded-none badge-warning text-warning-content text-xs tracking-tight uppercase">{ongoing}</div> : null }
                             <figure>
                               <Image
-                                      src={urlFor(project.representativePicture.imageData).quality(100).size(Math.round(project.representativePicture.imageData.metadata.dimensions.width/4),Math.round(project.representativePicture.imageData.metadata.dimensions.height/4)).fit('min').url().toString()}
+                                      src={urlFor(project.representativePicture.imageData).quality(100).size(Math.round(mainImageHeight*project.representativePicture.imageData.metadata.dimensions.width/project.representativePicture.imageData.metadata.dimensions.height),mainImageHeight).fit('min').url().toString()}
                                       alt={project.representativePicture.caption}
                                       title={project.representativePicture.caption}
-                                      width={Math.round(project.representativePicture.imageData.metadata.dimensions.width/4)}
-                                      height={Math.round(project.representativePicture.imageData.metadata.dimensions.height/4)}
-                                      className="object-cover w-auto h-52"
+                                      width={Math.round(mainImageHeight*project.representativePicture.imageData.metadata.dimensions.width/project.representativePicture.imageData.metadata.dimensions.height)}
+                                      height={mainImageHeight}
+                                      className="object-cover w-auto h-52" 
                                       priority={false}
                                       />
                             </figure>
                             {project.otherPictures !== null? <div className="carousel carousel-center max-w-md p-1 space-x-1 justify-center">{project.otherPictures.map((picture, index) => {
                               return (picture !== null? <Image
                                       key={picture._id}
-                                      src={urlFor(picture.imageData).quality(100).size(Math.round(picture.imageData.metadata.dimensions.width/4),Math.round(picture.imageData.metadata.dimensions.height/4)).fit('min').url().toString()}
+                                      src={urlFor(picture.imageData).quality(100).size(carouselImageWidth,Math.round(carouselImageWidth * picture.imageData.metadata.dimensions.height/picture.imageData.metadata.dimensions.width)).fit('min').url().toString()}
                                       alt={picture.caption}
                                       title={picture.caption}
-                                      width={Math.round(picture.imageData.metadata.dimensions.width/4)}
-                                      height={Math.round(picture.imageData.metadata.dimensions.height/4)}
+                                      width={carouselImageWidth}
+                                      height={Math.round(carouselImageWidth * picture.imageData.metadata.dimensions.height/picture.imageData.metadata.dimensions.width)}
                                       className="carousel-item object-cover w-12 h-auto"
                                       priority={false}
-                                      /> : ""
+                                      /> : null
                               )
-                            })}</div> : ""}
+                            })}</div> : null}
                             <div className="card-body">
                                 <h3 className="card-title">{project.name}</h3>
-                                <div className="flex flex-wrap items-center justify-between">
-                                  {project.startDate !== null? <span className="flex items-center justify-start text-xs tracking-tight uppercase text-success"><PiPlayDuotone/>&nbsp;{project.startDate}</span> : null }
-                                  {project.endDate !== null? <span className="flex items-center justify-start text-xs tracking-tight uppercase text-error"><PiStopDuotone/>&nbsp;{project.endDate}</span> : null }
+                                <div className="flex flex-wrap items-center justify-between my-1">
+                                  {project.startDate !== null? <span className="flex items-center justify-start text-xs tracking-tight uppercase"><PiPlayDuotone/>&nbsp;{project.startDate}</span> : null }
+                                  {project.endDate !== null? <span className="flex items-center justify-start text-xs tracking-tight uppercase"><PiStopDuotone/>&nbsp;{project.endDate}</span> : null }
                                 </div>
                                 <div className="line-clamp-5"><PortableText value={project.description}/></div>
-                                <div className="flex flex-wrap items-center justify-between">
-                                  <Link className="btn btn-xs btn-outline rounded-none btn-neutral" href="#">Read more</Link>
-                                  <Link className="btn btn-xs btn-outline rounded-none btn-neutral" href="#">Project website</Link>
-                                </div>
+                                <Link className="btn btn-xs btn-outline rounded-none btn-neutral absolute top-2 right-2" href="#"><GrMore/></Link>
                                 <div className="badge rounded-none badge-accent"><HiHashtag/></div>
                                 {project.keywords !== null? <ul className="flex flex-wrap items-center justify-start gap-1 text-xs tracking-tight lowercase">{project.keywords.map((keyword, index) => {
                                     return (
                                         <li key={index} className="border-b-[1px] p-1">{keyword}</li>
                                     )
                                 })}
-                                </ul> : ""}
+                                </ul> : null}
                             </div>
                         </article>
                     )
