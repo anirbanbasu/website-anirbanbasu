@@ -9,6 +9,7 @@ export type Project = {
     _updatedAt: Date,
     _rev: string,
     name: string,
+    slug: string,
     webURL: string,
     startDate: string,
     endDate: string,

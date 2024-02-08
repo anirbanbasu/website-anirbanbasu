@@ -21,11 +21,11 @@ export default async function Home() {
     <main className="flex items-center justify-center">
       <section className="mt-20 md:mt-24 max-w-7xl p-2">
         <div id={profile._id} className="grid grid-cols-6 gap-1">
-          <div className="bg-gradient-to-r from-primary via-accent to-error bg-clip-text text-transparent col-span-4 row-span-2 p-2 text-start break-words text-4xl font-bold md:font-black md:text-6xl">
+          <div className="bg-gradient-to-r from-primary via-accent to-error bg-clip-text text-transparent col-span-6 md:col-span-4 md:row-span-2 p-2 text-start break-words text-4xl font-bold md:font-black md:text-6xl">
             {profile.headline.toLowerCase()}
           </div>
-          <div className="col-span-2 col-start-5 row-span-3 flex items-center justify-center">
-            <div className="grid grid-cols-1 gap-1"> 
+          <div className="col-span-6 md:col-span-2 md:col-start-5 row-span-3 flex items-center justify-center">
+            <div className="grid grid-cols-1 gap-1">
               <Image
                   src={urlFor(profile.profileImage.imageData).quality(100).size(400,400).fit('min').url().toString()}
                   alt={profile.profileImage.caption}
@@ -39,18 +39,6 @@ export default async function Home() {
           </div>
           <div className="col-span-6 p-2 text-justify text-base md:text-lg font-extralight md:col-span-4">
             <PortableText value={profile.summary}/>
-          </div>
-          <div className="my-3 col-span-6 md:col-span-4 flex item-center justify-evenly">
-              {profile.socialLinks && profile.socialLinks.map((item, index) => {
-                  const Icon = socialLinkIcon(item.socialLinkType)
-                  if (item.socialLinkType !== 'other') {
-                    return (
-                        <Link key={index} href={item.linkURL} title={item.caption} aria-label={item.caption} target="_blank" rel="noreferrer noopener">
-                          <Icon className="text-secondary mx-2 w-8 h-8 hover:text-primary"/>
-                        </Link>
-                    )
-                  }
-                })}
           </div>
         </div>
       </section>

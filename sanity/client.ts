@@ -17,7 +17,7 @@ const sanityClientConfig: ClientConfig = {
     useCdn: true, // set to 'false' to bypass the edge cache
 }
 
-export const revalidateTime = 1800; // revalidate at most every half hour
+export const revalidateTime = 180; // revalidation time in seconds
 
 const sanityClient = createClient(sanityClientConfig);
 
@@ -129,12 +129,13 @@ export async function fetchProfile(): Promise<Profile> {
 
 export async function fetchProjects(): Promise<Project[]> {
   return sanityClient.fetch(
-    groq`*[_type == 'project'] | order(startDate desc) {
+    groq`*[_type == 'project'] | order(endDate desc) {
       _id,
       _createdAt,
       _updatedAt,
       _rev,
       name,
+      slug,
       webURL,
       startDate,
       endDate,

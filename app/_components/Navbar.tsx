@@ -13,7 +13,7 @@ export const routes = [
     subtitle: "The summary page",
     href: "/",
   },
-  {
+/*  {
     title: "Publications",
     subtitle: "Communicated research",
     href: "#",
@@ -22,17 +22,17 @@ export const routes = [
     title: "Teaching",
     subtitle: "Teaching and training",
     href: "#",
-  },
+  },*/
   {
     title: "Projects",
     subtitle: "Things I'm working on",
     href: "/projects",
   },
-  {
+/*  {
     title: "et cetera",
     subtitle: "and so forth...",
     href: "#",
-  },
+  },*/
 ];
 
 export default function Navbar() {
