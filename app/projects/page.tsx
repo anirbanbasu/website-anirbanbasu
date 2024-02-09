@@ -32,7 +32,7 @@ export default async function Home() {
        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             {projects && projects.map((project, index) => {
                     return (
-                        <article key={project._id} className="opacity-90 card card-compact rounded-none w-auto bg-base-200 shadow-md">
+                        <article key={project._id} className="opacity-90 card card-compact rounded-none w-auto bg-base-200 shadow-md md:shadow-none">
                           {project.endDate === null? <div className="absolute top-2 left-2 badge rounded-none badge-warning text-warning-content text-xs tracking-tight uppercase">{lblOngoing}</div> : null }
                             <figure>
                               <Image

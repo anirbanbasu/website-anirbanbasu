@@ -39,7 +39,7 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
       <header>
-        <nav className="w-full bg-neutral opacity-95 align-middle fixed top-0 left-0 right-0 z-[100]">
+        <nav className="w-full bg-neutral bg-opacity-90 backdrop-blur-md md:backdrop-blur-sm align-middle fixed top-0 left-0 right-0 z-[100]">
           <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
               <div className="flex items-center justify-between py-3 md:py-5 md:block">
                 <Link href="/">

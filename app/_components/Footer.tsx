@@ -9,7 +9,7 @@ export default async function Footer() {
     const profile:Profile = await fetchProfile()
 
     return (
-      <footer className="border-t-[1px] w-full">
+      <footer className="border-t-[1px] backdrop-blur-md md:backdrop-blur-sm w-full">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-y-4 px-2 py-6">
           <span className="flex flex-wrap items-center justify-between">
             {profile.socialLinks && profile.socialLinks.map((item, index) => {
