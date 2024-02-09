@@ -5,9 +5,8 @@ import { Metadata } from 'next';
 import { Profile } from '@/types/Profile';
 import Link from 'next/link';
 import { Project } from '@/types/Project';
-import { HiHashtag } from "react-icons/hi2";
 import { PiPlayDuotone, PiStopDuotone } from "react-icons/pi";
-import { GrMore } from "react-icons/gr";
+import { MdOutlineTopic, MdReadMore } from "react-icons/md";
 
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,7 +20,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const projects:Project[] = await fetchProjects()
-  const ongoing:string = 'on-going'
+  const lblOngoing:string = 'on-going'
+  const lblReadMore:string = 'Read more'
 
   const mainImageHeight:number = 208 //h-52 = 208px, adjust height and width request to download smaller images
   const carouselImageWidth:number = 144 //w-12 = 48px, adjust height and width request to download smaller images but 48 is too small to be useful
@@ -32,8 +32,8 @@ export default async function Home() {
        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             {projects && projects.map((project, index) => {
                     return (
-                        <article key={project._id} className="card card-compact rounded-none w-auto bg-base-200 shadow-md">
-                          {project.endDate === null? <div className="absolute top-2 left-2 badge rounded-none badge-warning text-warning-content text-xs tracking-tight uppercase">{ongoing}</div> : null }
+                        <article key={project._id} className="opacity-90 card card-compact rounded-none w-auto bg-base-200 shadow-md">
+                          {project.endDate === null? <div className="absolute top-2 left-2 badge rounded-none badge-warning text-warning-content text-xs tracking-tight uppercase">{lblOngoing}</div> : null }
                             <figure>
                               <Image
                                       src={urlFor(project.representativePicture.imageData).quality(100).size(Math.round(mainImageHeight*project.representativePicture.imageData.metadata.dimensions.width/project.representativePicture.imageData.metadata.dimensions.height),mainImageHeight).fit('min').url().toString()}
@@ -61,18 +61,13 @@ export default async function Home() {
                             <div className="card-body">
                                 <h3 className="card-title">{project.name}</h3>
                                 <div className="flex flex-wrap items-center justify-between my-1">
-                                  {project.startDate !== null? <span className="flex items-center justify-start text-xs tracking-tight uppercase"><PiPlayDuotone/>&nbsp;{project.startDate}</span> : null }
-                                  {project.endDate !== null? <span className="flex items-center justify-start text-xs tracking-tight uppercase"><PiStopDuotone/>&nbsp;{project.endDate}</span> : null }
+                                <Link className="btn btn-xs rounded-none btn-outline uppercase tracking-tight" href="#" aria-label={lblReadMore} title={lblReadMore}>{lblReadMore}</Link>
+                                {project.startDate !== null? <span className="flex items-center justify-start text-xs tracking-tight uppercase"><PiPlayDuotone/>&nbsp;{project.startDate}</span> : null }
+                                {project.endDate !== null? <span className="flex items-center justify-start text-xs tracking-tight uppercase"><PiStopDuotone/>&nbsp;{project.endDate}</span> : null }
                                 </div>
-                                <div className="line-clamp-5"><PortableText value={project.description}/></div>
-                                <Link className="btn btn-xs btn-outline rounded-none btn-neutral absolute top-2 right-2" href="#"><GrMore/></Link>
-                                <div className="badge rounded-none badge-accent"><HiHashtag/></div>
-                                {project.keywords !== null? <ul className="flex flex-wrap items-center justify-start gap-1 text-xs tracking-tight lowercase">{project.keywords.map((keyword, index) => {
-                                    return (
-                                        <li key={index} className="border-b-[1px] p-1">{keyword}</li>
-                                    )
-                                })}
-                                </ul> : null}
+                                <div className="line-clamp-6">
+                                  <PortableText value={project.description}/>
+                                </div>
                             </div>
                         </article>
                     )
