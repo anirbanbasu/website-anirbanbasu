@@ -17,7 +17,7 @@ const sanityClientConfig: ClientConfig = {
     useCdn: true, // set to 'false' to bypass the edge cache
 }
 
-export const revalidateTime = 180; // revalidation time in seconds
+export const revalidateTime = 192; // revalidation time in seconds
 
 const sanityClient = createClient(sanityClientConfig);
 
@@ -92,7 +92,8 @@ export async function fetchProfile(): Promise<Profile> {
             ...,
             skills[] -> {...},
           },
-          projects[] -> {
+          projects[] 
+              | order(endDate desc) -> {
             ...,
             skills[] -> {...},
             contributors[] -> {...},

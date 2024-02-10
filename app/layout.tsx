@@ -16,9 +16,8 @@ export default function RootLayout({
     <html data-theme="pastel" lang="en">
       <body className={montserrat.className}>
         <Navbar />
-        
-          {children}
-          <Footer />
+        {children}
+        <Footer />
         <Analytics />
       </body>
     </html>

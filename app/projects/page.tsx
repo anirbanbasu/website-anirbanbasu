@@ -27,7 +27,7 @@ export default async function Home() {
   const carouselImageWidth:number = 144 //w-12 = 48px, adjust height and width request to download smaller images but 48 is too small to be useful
 
   return (
-    <main className="flex items-center justify-center">
+    <main className="flex flex-col flex-wrap items-center justify-center">
       <section className="mt-20 md:mt-24 max-w-7xl p-2">
        <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             {projects && projects.map((project, index) => {
